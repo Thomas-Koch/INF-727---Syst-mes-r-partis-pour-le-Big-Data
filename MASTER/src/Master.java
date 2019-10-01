@@ -12,10 +12,10 @@ public class Master {
 		Process proc = pb.start();
 		boolean ret = proc.waitFor(timeout, TimeUnit.SECONDS); // permet de renvoyer true ou false pour savoir si le timeout est arrivé au bout avant que le process ne soit fini ou pas
 		if (ret) {
-			System.out.println("Pas de timeout, le process est allé au bout");
+			System.out.println("Pas de timeout, le process est allé à son terme");
 		}
 		else {
-			System.out.println("Timeout, le process n'est pas allé au bout");
+			System.out.println("Timeout, le process a été stoppé avant son terme");
 			proc.destroy();
 		}
 		// pb.redirectError();
