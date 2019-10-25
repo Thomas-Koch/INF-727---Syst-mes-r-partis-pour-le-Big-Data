@@ -14,12 +14,12 @@ public class Deploy {
 		List<String> a = Files.readAllLines(Paths.get("DEPLOY.txt"));
 
 		for (String line : a) {
-			ProcessBuilder pb = new ProcessBuilder("ssh", "tkoch@"+line, "hostname");
-			pb.inheritIO();
-			Process proc = pb.start();
-			boolean ret = proc.waitFor(timeout, TimeUnit.SECONDS); // permet de renvoyer true ou false pour savoir si le timeout est arrivé au bout avant que le process ne soit fini ou pas
+			ProcessBuilder pb1 = new ProcessBuilder("ssh", "tkoch@"+line, "hostname");
+			pb1.inheritIO();
+			Process proc1 = pb1.start();
+			boolean ret1 = proc1.waitFor(timeout, TimeUnit.SECONDS); // permet de renvoyer true ou false pour savoir si le timeout est arrivé au bout avant que le process ne soit fini ou pas
 
-			if (ret) { // = la machine distante a répondu avant le timeout
+			if (ret1) { // = la machine distante a répondu avant le timeout
 				System.out.println("répond \n=> création du dossier mkdir");
 				ProcessBuilder pb2 = new ProcessBuilder("ssh", "tkoch@"+line, "mkdir /tmp/tkoch"); 
 				pb2.inheritIO();
@@ -60,7 +60,7 @@ public class Deploy {
 			}
 			else { // = la machine distante n'a pas répondu avant le timeout
 				System.out.println(line + " timeout\n");
-				proc.destroy();
+				proc1.destroy();
 			}
 		}
 

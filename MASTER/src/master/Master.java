@@ -14,12 +14,12 @@ public class Master {
 		List<String> a = Files.readAllLines(Paths.get("DEPLOY.txt"));
 
 		for (String line : a) {
-			ProcessBuilder pb = new ProcessBuilder("ssh", "tkoch@"+line, "hostname");
-			pb.inheritIO();
-			Process proc1 = pb.start();
-			boolean ret = proc1.waitFor(timeout, TimeUnit.SECONDS); // permet de renvoyer true ou false au bout de timeout pour savoir si proc est arrivé au bout
+			ProcessBuilder pb1 = new ProcessBuilder("ssh", "tkoch@"+line, "hostname");
+			pb1.inheritIO();
+			Process proc1 = pb1.start();
+			boolean ret1 = proc1.waitFor(timeout, TimeUnit.SECONDS); // permet de renvoyer true ou false au bout de timeout pour savoir si proc est arrivé au bout
 
-			if (ret) { // = la machine distante a répondu avant le timeout
+			if (ret1) { // = la machine distante a répondu avant le timeout
 				System.out.println("répond \n=> création du dossier avec mkdir");
 				ProcessBuilder pb2 = new ProcessBuilder("ssh", "tkoch@"+line, "mkdir -p /tmp/tkoch/splits"); 
 				pb2.inheritIO();
